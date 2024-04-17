@@ -96,32 +96,30 @@ def main(url, dest_lat, dest_lon, dest_alt=20):
         # Computer error
 		(errEast, errNorth, errUp) = pymap3d.geodetic2enu(
             trajectory["lat"], trajectory["lon"], trajectory["alt"],
-            states["location"]["latitude"], states["location"]["longitude"], states["location"]["altitude"]
-            )
+            states["location"]["latitude"], states["location"]["longitude"], states["location"]["altitude"])
 		distToWp = math.hypot(errEast, errNorth)
 		bearingToWp = math.atan2(errEast, errNorth)
 		errX =  -distToWp*math.cos(bearingToWp + math.pi/2 - states["heading"]/180.*math.pi)
 		errY =  distToWp*math.sin(bearingToWp + math.pi/2 - states["heading"]/180.*math.pi)
 		errAlt = errUp
 		errHead = trajectory["head"] - trajectory["heading"]
-  
-        dX = errX-oldX
-    	dY = errY-oldY
-    	dZ = errAlt-oldZ
-    	dH = oldH-errHead
-    	oldX = errX
-        oldY = errY
-        oldZ = errAlt
-        oldH = errHead
+  		dX = errX-oldX
+    		dY = errY-oldY
+    		dZ = errAlt-oldZ
+    		dH = oldH-errHead
+    		oldX = errX
+        	oldY = errY
+        	oldZ = errAlt
+        	oldH = errHead
 
         # Send control command
-        cmdBodyX = errX *CTRL_GAIN_X + kDx * dX
-        cmdBodyY = errY *CTRL_GAIN_Y + kDy * dY
-        cmdAlt = errAlt *CTRL_GAIN_ALT + kDz * dZ
-        cmdHead = errHead *CTRL_GAIN_HEAD + kDh * dH
-        print(now-lastT)
-        lastT=millis
-		requestSendStick(url, cmdHead, cmdAlt, cmdBodyX, cmdBodyY)
+        	cmdBodyX = errX *CTRL_GAIN_X + kDx * dX
+        	cmdBodyY = errY *CTRL_GAIN_Y + kDy * dY
+        	cmdAlt = errAlt *CTRL_GAIN_ALT + kDz * dZ
+        	cmdHead = errHead *CTRL_GAIN_HEAD + kDh * dH
+        	print(now-lastT)
+        	lastT=millis
+			requestSendStick(url, cmdHead, cmdAlt, cmdBodyX, cmdBodyY)
 
         # Assess if waypoint reached
 		if abs(errX) < CTRL_THRESH_X and abs(errY) < CTRL_THRESH_Y and abs(errAlt) < CTRL_THRESH_ALT and abs(errHead) < CTRL_THRESH_HEAD:
