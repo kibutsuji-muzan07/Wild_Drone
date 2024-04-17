@@ -82,7 +82,7 @@ def main(url, dest_lat, dest_lon, dest_alt = 20):
 		errX =  -distToWp*math.cos(bearingToWp + math.pi/2 - states["heading"]/180.*math.pi)
 		errY =  distToWp*math.sin(bearingToWp + math.pi/2 - states["heading"]/180.*math.pi)
 		errAlt = errUp
-		errHead = trajectory["head"] - trajectory["heading"]
+		errHead = trajectory["head"] - states["heading"]
 
 
         # Send control command
@@ -99,9 +99,9 @@ def main(url, dest_lat, dest_lon, dest_alt = 20):
 		
 if __name__ == '__main__':
 	try:
-		IP_RC = "192.168.4.1"
+		IP_RC = "192.168.1.4"
 		url = f"http://{IP_RC}:8080"
-		main(url, dest_lat=51.4235413, dest_lon= -2.6708488)
+		main(url, dest_lat=51.7235413, dest_lon= -2.7708488)
 	except KeyboardInterrupt:
 		print('Interrupted')
 		requestSendStick(url)
