@@ -3,11 +3,14 @@ import cv2 # Import OpenCV Library
 from ultralytics import YOLO
 import cv2
 import json
+import bufferLessVideoCapture
 
 def find_zebra():
 
     model = YOLO('yolov8n.pt')
     model.to('cuda') #uncomment if using CUDA
+    # Check if CUDA (GPU) is available
+    use_cuda = cv2.cuda.getCudaEnabledDeviceCount() > 0
 
     classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "train", "truck", "boat",
                 "traffic light", "fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat",
@@ -20,15 +23,18 @@ def find_zebra():
                 "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors",
                 "teddy bear", "hair drier", "toothbrush"
                 ]
+    #drone_cam_buffer = bufferLessVideoCapture
 
-    #cap = cv2.VideoCapture("rtsp://aaa:aaa@192.168.1.4:8554/streaming/live/1") #uncomment if using CUDA
-    cap = cv2.VideoCapture(0) #for video camera testing
+    cap = cv2.VideoCapture("rtsp://aaa:aaa@192.168.1.4:8554/streaming/live/1") #uncomment if using CUDA
+    #cap = cv2.VideoCapture(0) #for video camera testing
+    if use_cuda:
+        print("Using GPU for processing")
+        cap = cv2.cudacodec.createVideoReader(str(cap))
 
     have_found_zebra = False
 
     while have_found_zebra == False:
 
-        #cap = cv2.VideoCapture("rtsp://aaa:aaa@192.168.1.4:8554/streaming/live/1") #delete if using CUDA
         success, img = cap.read()
 
         if not success:

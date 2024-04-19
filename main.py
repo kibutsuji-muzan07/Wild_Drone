@@ -1,4 +1,5 @@
-import wander, animal_tracking, approach_object, locate_coordinate, take_snaps
+import wander, animal_tracking, approach_object
+#import locate_coordinate, take_snaps
 import concurrent.futures
 import sys
 import os
@@ -18,9 +19,9 @@ if __name__ == '__main__':
 		#initialize
 		roam_and_check(url)
 		#todo
-		lat,lon,alt = locate_coordinate()
-		approach_object.approach(url, lat, lon, alt)
-		flag = take_snaps() # return something, indicating taking snaps are done
+		#lat,lon,alt = locate_coordinate()
+		#approach_object.approach(url, lat, lon, alt)
+		#flag = take_snaps() # return something, indicating taking snaps are done
 		approach_object.return_to_launch(url, home)
 	except KeyboardInterrupt:
 		print('Interrupted')

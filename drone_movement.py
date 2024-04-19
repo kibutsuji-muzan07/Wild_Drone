@@ -1,9 +1,6 @@
 ## IMPORTS
 import requests
 import ast
-import pymap3d
-import math
-import concurrent.futures
 
 ## CONSTANTS
 
