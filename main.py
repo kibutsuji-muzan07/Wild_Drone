@@ -1,4 +1,4 @@
-import wander, animal_tracking
+import wander, animal_tracking, approach_object, locate_coordinate, take_snaps
 import concurrent.futures
 import sys
 import os
@@ -15,10 +15,15 @@ if __name__ == '__main__':
 	try:
 		IP_RC = "192.168.1.4"
 		url = f"http://{IP_RC}:8080"
+		#initialize
 		roam_and_check(url)
+		#todo
+		lat,lon,alt = locate_coordinate()
+		approach_object.approach(url, lat, lon, alt)
+		flag = take_snaps() # return something, indicating taking snaps are done
+		approach_object.return_to_launch(url, home)
 	except KeyboardInterrupt:
 		print('Interrupted')
-		#wander.Path_planning.requestSendStick(url)
 		try:
 			sys.exit(130)
 		except SystemExit:
