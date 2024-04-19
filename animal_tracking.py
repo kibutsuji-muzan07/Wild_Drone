@@ -21,8 +21,8 @@ def find_zebra():
                 "teddy bear", "hair drier", "toothbrush"
                 ]
 
-    cap = cv2.VideoCapture("rtsp://aaa:aaa@192.168.1.4:8554/streaming/live/1") #uncomment if using CUDA
-    #cap = cv2.VideoCapture(0) #for video camera testing
+    #cap = cv2.VideoCapture("rtsp://aaa:aaa@192.168.1.4:8554/streaming/live/1") #uncomment if using CUDA
+    cap = cv2.VideoCapture(0) #for video camera testing
 
     have_found_zebra = False
 
@@ -90,4 +90,4 @@ def find_zebra():
     return info
     
 
-find_zebra()
+#find_zebra()
