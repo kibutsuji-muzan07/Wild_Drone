@@ -1,9 +1,5 @@
-<<<<<<< Updated upstream
-import wander, animal_tracking, approach_object
 #import locate_coordinate, take_snaps
-=======
 import wander, animal_tracking, approach_object,localization
->>>>>>> Stashed changes
 import concurrent.futures
 import sys
 import os

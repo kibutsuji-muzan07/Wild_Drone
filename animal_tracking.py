@@ -3,7 +3,6 @@ import cv2 # Import OpenCV Library
 from ultralytics import YOLO
 import cv2
 import json
-import bufferLessVideoCapture
 
 def find_zebra():
 
