@@ -28,7 +28,7 @@ def calculate_values(a1, h, x1, y1, z,dy):
 
     return d9, a3, a4
 
-def get_animal_pos(height, ):
+def get_animal_pos(height):
 #a1 is the camera pitch angle
 #h is the altitude
 #x and y are the coordinates of the animal in the photo
@@ -48,7 +48,7 @@ def get_animal_pos(height, ):
 # x = pixel x - 320
     y = (y1+y2)/2
 # y = -pixel y + 240
-    z = 1305
+    z = math.sqrt((xres**2)+(yres**2))
     P = y2-y1
 # P is the pixel height in screen
     H = 600
@@ -61,7 +61,7 @@ def get_animal_pos(height, ):
     dhdeg=(a3*180)/math.pi
     dX= (math.cos(a3)*(D-2000))/1000
     dY= (math.sin(a3)*(D-2000))/1000
-    dAlt= h*(tan(a4+45))
+    dAlt= h*(math.tan(a4+45))
     
     #1183744 + 518400=1702144= 1305
 #     print("yaw angle:", a3,)
@@ -74,6 +74,3 @@ def get_animal_pos(height, ):
     return dX, dY, dAlt, dhdeg
 #The length unit of the output variable is meter
 #The output angle unit is radians
-if __name__ == "__main__":
-
-    main()

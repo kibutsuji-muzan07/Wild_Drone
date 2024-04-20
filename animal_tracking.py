@@ -99,13 +99,14 @@ def take_snapshot():
     cap1 = cv2.VideoCapture("rtsp://aaa:aaa@192.168.1.4:8554/streaming/live/1")
     success1,img1=cap.read()
     if(success1==True):
-        cv2.imwrite('my_video_frame.png', img1)
+        cv2.imwrite('zebra photo taken.png', img1)
         print("Snap Shotted!!")
         
     else:
         print("Did not latch onto video feed :(")
         
     cap1.release()
-    
+
+
 
 #find_zebra()

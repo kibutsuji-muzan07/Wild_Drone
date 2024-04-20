@@ -1,9 +1,5 @@
-<<<<<<< Updated upstream
-import wander, animal_tracking, approach_object
-#import locate_coordinate, take_snaps
-=======
 import wander, animal_tracking, approach_object,localization
->>>>>>> Stashed changes
+from drone_movement import *
 import concurrent.futures
 import sys
 import os
@@ -15,6 +11,7 @@ def roam_and_check(url):
 		future = executor.submit(animal_tracking.find_zebra)
 		  # Start process 2
 		wander.start_roaming(future, url)
+	
 
 if __name__ == '__main__':
 	try:
@@ -22,10 +19,13 @@ if __name__ == '__main__':
 		url = f"http://{IP_RC}:8080"
 		#initialize
 		roam_and_check(url)
+
 		#todo
-		#lat,lon,alt = locate_coordinate()
-		#approach_object.approach(url, lat, lon, alt)
-		#flag = take_snaps() # return something, indicating taking snaps are done
+		states=requestAllStates(url)
+		dX, dY, dAlt, dH=localization.get_animal_pos(states["location"]["altitude"])
+		reached_obj=approach_object.approach_obj(url, dY,dx,dAlt,dH)
+		if(reached_obj):
+			animal_tracking.take_snapshot()
 		approach_object.return_to_launch(url, home)
 	except KeyboardInterrupt:
 		print('Interrupted')

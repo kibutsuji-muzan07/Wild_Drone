@@ -62,3 +62,5 @@ def approach_obj(url, y,x, alt, head = 0):
             requestSendStick(url)
             take_snapshot()
             break
+        
+    return True
