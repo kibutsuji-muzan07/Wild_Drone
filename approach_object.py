@@ -1,4 +1,6 @@
 from drone_movement import *
+import pymap3d
+import math
 
 def approach(url, lat, lon, alt, head = 0):
     requestSendStick(url)
@@ -32,4 +34,4 @@ def approach(url, lat, lon, alt, head = 0):
             break
 
 def return_to_launch(url, home):
-    approach(url, home[0], home[1], alt = 1)
+    approach(url, home[0], home[1], alt = 25)
