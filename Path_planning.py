@@ -1,4 +1,6 @@
 from drone_movement import *
+import concurrent.futures
+import math
 
 def move(future, url, dest_lat =0, dest_lon =0, dest_alt = 20, head = 0):
 	requestGet(url, EP_BASE, True)
