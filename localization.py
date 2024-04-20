@@ -1,8 +1,7 @@
 import math
 import sys
-import os
+import animal_tracking as at
 import time
-
 
 
 def calculate_values(a1, h, x1, y1, z,dy):
@@ -29,23 +28,30 @@ def calculate_values(a1, h, x1, y1, z,dy):
 
     return d9, a3, a4
 
-def main():
+def get_animal_pos(height, ):
 #a1 is the camera pitch angle
 #h is the altitude
 #x and y are the coordinates of the animal in the photo
 #z is the diagonal length of the photo
 #The length unit of the input variable is millimeter
 # the angle unit of the input variable is degree.
+    xres= at.info["xres"]
+    yres = at.info["yres"]
+    x1= at.info["x1"]
+    x2=at.info["x2"]
+    y1=at.info["y1"]
+    y2=at.info["y2"]
+
     a1 = 45
-    h = 50000
-    x = 378
+    h = height
+    x = (x1+x2)/2
 # x = pixel x - 320
-    y = 241
+    y = (y1+y2)/2
 # y = -pixel y + 240
-    z = 800
-    P = 213
+    z = 1305
+    P = y2-y1
 # P is the pixel height in screen
-    H = 1000
+    H = 600
 #H is the real zebra height
     P1 = 5 * P / z
 
@@ -53,16 +59,19 @@ def main():
     D = d9 * (H - P1) / P1
     dhrad=a3
     dhdeg=(a3*180)/math.pi
-    dX= (math.cos(a3)*D)/1000
-    dY= (math.sin(a3)*D)/1000
+    dX= (math.cos(a3)*(D-2000))/1000
+    dY= (math.sin(a3)*(D-2000))/1000
+    dAlt= h*(tan(a4+45))
     
-    print("yaw angle:", a3,)
-# If bigger than 0, it indicates that the nose is pointing to the right
-    print("pitch angle:", a4,)
-# If bigger than 0, it indicates that the nose is pointing upwards
-    print("distance:", D/1000)
+    #1183744 + 518400=1702144= 1305
+#     print("yaw angle:", a3,)
+# # If bigger than 0, it indicates that the nose needs to point rightwards
+#     print("pitch angle:", a4,)
+# # If bigger than 0, it indicates that the nose needs to point upwards
+#     print("distance:", D/1000)
     
-    print("X dist to animal:", dX, "\ny dist to animal: ",dY, "\nheading change: ", dhrad,"|", dhdeg)
+    # print("X dist to animal:", dX, "\ny dist to animal: ",dY, "\nheading change: ", dhrad,"|", dhdeg)
+    return dX, dY, dAlt, dhdeg
 #The length unit of the output variable is meter
 #The output angle unit is radians
 if __name__ == "__main__":
