@@ -3,7 +3,6 @@ import cv2 # Import OpenCV Library
 from ultralytics import YOLO
 import cv2
 import json
-import bufferLessVideoCapture
 
 def find_zebra():
 
@@ -23,7 +22,6 @@ def find_zebra():
                 "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors",
                 "teddy bear", "hair drier", "toothbrush"
                 ]
-    #drone_cam_buffer = bufferLessVideoCapture
 
     cap = cv2.VideoCapture("rtsp://aaa:aaa@192.168.1.4:8554/streaming/live/1") #uncomment if using CUDA
     #cap = cv2.VideoCapture(0) #for video camera testing
