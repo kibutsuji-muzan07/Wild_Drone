@@ -3,12 +3,12 @@ import Path_planning
 import concurrent.futures
 
 def start_roaming(future, url):
-    trajectory = [{"lat": 51.4237513,"lon": -2.6695061, "alt": 35, "head":0},
-                {"lat": 51.4227477,"lon": -2.6690555, "alt": 35, "head":0},
-                {"lat": 51.4230555,"lon": -2.6716304, "alt": 35, "head":0},
-                {"lat": 51.4218245,"lon": -2.6704931, "alt": 35, "head":0},
-                {"lat": 51.422246,"lon": -2.6700747, "alt": 35, "head":0},
-                {"lat": 51.423671,"lon": -2.670064, "alt": 35, "head":0}]
+    trajectory = [{"lat": 51.4237513,"lon": -2.6695061, "alt": 25, "head":0},
+                {"lat": 51.4227477,"lon": -2.6690555, "alt": 25, "head":0},
+                {"lat": 51.4230555,"lon": -2.6716304, "alt": 25, "head":0},
+                {"lat": 51.4218245,"lon": -2.6704931, "alt": 25, "head":0},
+                {"lat": 51.422246,"lon": -2.6700747, "alt": 25, "head":0},
+                {"lat": 51.423671,"lon": -2.670064, "alt": 25, "head":0}]
 
     while True:
         try:
