@@ -14,7 +14,7 @@ def roam_and_check(url):
 
 if __name__ == '__main__':
 	try:
-		IP_RC = "192.168.1.4"
+		IP_RC = "192.168.1.2"
 		url = f"http://{IP_RC}:8080"
 		#initialize
 		roam_and_check(url)

@@ -20,10 +20,9 @@ def find_zebra():
                 "carrot", "hot dog", "pizza", "donut", "cake", "chair", "sofa", "pottedplant", "bed",
                 "diningtable", "toilet", "tvmonitor", "laptop", "mouse", "remote", "keyboard", "cell phone",
                 "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors",
-                "teddy bear", "hair drier", "toothbrush"
-                ]
+                "teddy bear", "hair drier", "toothbrush"]
 
-    cap = cv2.VideoCapture("rtsp://aaa:aaa@192.168.1.4:8554/streaming/live/1") #uncomment if using CUDA
+    cap = cv2.VideoCapture("rtsp://aaa:aaa@192.168.1.2:8554/streaming/live/1") #uncomment if using CUDA
     #cap = cv2.VideoCapture(0) #for video camera testing
     if use_cuda:
         print("Using GPU for processing")
