@@ -1,8 +1,12 @@
 from drone_movement import *
-
+import concurrent.futures
+import pymap3d
+import math
 def move(future, url, dest_lat =0, dest_lon =0, dest_alt = 20, head = 0):
 	requestGet(url, EP_BASE, True)
 	requestSendStick(url)
+	info = None
+	height = None
     # Square at fenswood, right hand turn, altitude of waypoint to the south higher, looking about 45 deg to left
 	#trajectory = {"lat": dest_lat,"lon": dest_lon, "alt": dest_alt, "head":0}
 
@@ -15,7 +19,7 @@ def move(future, url, dest_lat =0, dest_lon =0, dest_alt = 20, head = 0):
 			result = future.result(timeout=0.1)  # Check with a timeout
 			print(f"Process 1: Zebra found! ({result})")
 			requestSendStick(url)
-			break  # Exit the loop when process 1 finishes
+			return result, states["location"]["altitude"]
 		except concurrent.futures.TimeoutError:
 			# Continue the loop if detection hasn't finished yet
 			# Get current state
@@ -42,7 +46,7 @@ def move(future, url, dest_lat =0, dest_lon =0, dest_alt = 20, head = 0):
 			# Assess if waypoint reached
 			if abs(errX) < CTRL_THRESH_X and abs(errY) < CTRL_THRESH_Y and abs(errAlt) < CTRL_THRESH_ALT and abs(errHead) < CTRL_THRESH_HEAD:
 				requestSendStick(url)
-				break
+				return info, height
 			print("Process 2: Waiting for detection...")
 		except concurrent.futures.CancelledError:
 			print("Finding zebra stopped (detection cancelled)")

@@ -48,7 +48,7 @@ def requestSend(baseUrl, endPoint, data, verbose=False):
 
 def requestSendStick(baseUrl, leftX = 0, leftY = 0, rightX = 0, rightY = 0):
 	# Saturate values such that they are in [-1;1]
-	s = 0.3
+	s = 0.1
 	leftX = max(-s,min(s,leftX))
 	leftY = max(-s,min(s,leftY))
 	rightX = max(-s,min(s,rightX))
