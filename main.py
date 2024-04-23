@@ -19,17 +19,13 @@ if __name__ == '__main__':
 		IP_RC = "192.168.1.5"
 		url = f"http://{IP_RC}:8080"
 		#initialize
-		#animal_tracking.find_zebra(IP_RC)
 		info, height = roam_and_check(url)
-		#print("pixel location: ",info)
-		#print("height of the drone", height)
 
 		#todo
-		# states=requestAllStates(url)
-		dX, dY, dAlt, dH=localization.get_animal_pos(info, height)
-		reached_obj=approach_object.approach_obj(url, dY,dX,dAlt,dH)
-		if(reached_obj):
-			animal_tracking.take_snapshot(IP_RC)
+		#dX, dY, dAlt, dH=localization.get_animal_pos(info, height)
+		#reached_obj=approach_object.approach_obj(url, dY,dX,dAlt,dH)
+		#if(reached_obj):
+		animal_tracking.take_snapshot(IP_RC)
 		approach_object.return_to_launch(url, home)
 	except KeyboardInterrupt:
 		print('Interrupted')

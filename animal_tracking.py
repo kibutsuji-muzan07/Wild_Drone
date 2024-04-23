@@ -25,8 +25,8 @@ def find_zebra(url):
                 ]
     #drone_cam_buffer = bufferLessVideoCapture
 
-    #cap = cv2.VideoCapture(f"rtsp://aaa:aaa@{url}:8554/streaming/live/1") #uncomment if using CUDA
-    cap = cv2.VideoCapture(0) #for video camera testing
+    cap = cv2.VideoCapture(f"rtsp://aaa:aaa@{url}:8554/streaming/live/1") #uncomment if using CUDA
+    #cap = cv2.VideoCapture(0) #for video camera testing
     if use_cuda:
         print("Using GPU for processing")
         cap = cv2.cudacodec.createVideoReader(str(cap))
@@ -99,7 +99,7 @@ def take_snapshot(url):
     cap1 = cv2.VideoCapture(f"rtsp://aaa:aaa@{url}:8554/streaming/live/1")
     success1,img1=cap1.read()
     if(success1==True):
-        cv2.imwrite('zebra photo taken.png', img1)
+        cv2.imwrite('zebra_photo_taken.png', img1)
         print("Snap Shotted!!")
         
     else:
