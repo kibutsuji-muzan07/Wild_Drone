@@ -4,7 +4,7 @@ from ultralytics import YOLO
 import cv2
 import json
 
-def find_zebra():
+def find_zebra(url):
 
     model = YOLO('yolov8n.pt')
     model.to('cuda') #uncomment if using CUDA
@@ -24,7 +24,7 @@ def find_zebra():
                 ]
     #drone_cam_buffer = bufferLessVideoCapture
 
-    cap = cv2.VideoCapture("rtsp://aaa:aaa@192.168.1.4:8554/streaming/live/1") #uncomment if using CUDA
+    cap = cv2.VideoCapture(f"rtsp://aaa:aaa@{url}:8554/streaming/live/1") #uncomment if using CUDA
     #cap = cv2.VideoCapture(0) #for video camera testing
     if use_cuda:
         print("Using GPU for processing")
@@ -94,17 +94,18 @@ def find_zebra():
     cv2.destroyAllWindows()
     return info
 
-def take_snapshot():
-    cap1 = cv2.VideoCapture("rtsp://aaa:aaa@192.168.1.4:8554/streaming/live/1")
-    success1,img1=cap.read()
+def take_snapshot(url):
+    cap1 = cv2.VideoCapture(f"rtsp://aaa:aaa@{url}:8554/streaming/live/1")
+    success1,img1=cap1.read()
     if(success1==True):
-        cv2.imwrite('my_video_frame.png', img1)
+        cv2.imwrite('zebra_photo_taken.png', img1)
         print("Snap Shotted!!")
         
     else:
         print("Did not latch onto video feed :(")
         
     cap1.release()
-    
+
+
 
 #find_zebra()

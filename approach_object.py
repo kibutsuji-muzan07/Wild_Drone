@@ -2,6 +2,8 @@ from drone_movement import *
 import pymap3d
 import math
 from animal_tracking import take_snapshot
+import math
+import pymap3d
 
 def approach(url, lat, lon, alt, head = 0):
     requestSendStick(url)
