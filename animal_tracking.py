@@ -80,6 +80,7 @@ def is_glare_present(frame):
   return avg_value > glare_threshold
 
 def find_zebra(url):
+    info = {}
 
     model = YOLO('yolov8n.pt')
     model.to('cuda') #uncomment if using CUDA
@@ -99,8 +100,8 @@ def find_zebra(url):
                 ]
     #drone_cam_buffer = bufferLessVideoCapture
 
-    cap = cv2.VideoCapture(f"rtsp://aaa:aaa@{url}:8554/streaming/live/1") #uncomment if using CUDA
-    #cap = cv2.VideoCapture(0) #for video camera testing
+    #cap = cv2.VideoCapture(f"rtsp://aaa:aaa@{url}:8554/streaming/live/1") #uncomment if using CUDA
+    cap = cv2.VideoCapture(0) #for video camera testing
     if use_cuda:
         print("Using GPU for processing")
         cap = cv2.cudacodec.createVideoReader(str(cap))
@@ -167,7 +168,8 @@ def find_zebra(url):
         # if any(box.cls[0] == "zebra" for box in results.pandas().xyxy[0].to_pandas()):  # Check if any zebra is detected in the frame
         #     have_found_zebra = True
 
-        cv2.imshow('Webcam', img)
+        flipped_image = cv2.flip(processed_frame, 1)
+        cv2.imshow('Webcam', flipped_image)
         if cv2.waitKey(1) == ord('q'):
             break
 
@@ -191,4 +193,4 @@ def take_snapshot(url):
 
 
 
-#find_zebra("192.168.1.5")
+find_zebra("192.168.1.5")
