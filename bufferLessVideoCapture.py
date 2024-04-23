@@ -9,7 +9,13 @@ import time
 class BufferLessVideoCapture:
 	def __init__(self, IP_RC):
 		source = f"rtsp://aaa:aaa@{IP_RC}:8554/streaming/live/1"
-		self.cap = cv2.VideoCapture(source)
+		capture = cv2.VideoCapture(source) #Default video capture
+
+		if cv2.cuda.getCudaEnabledDeviceCount() > 0: #Check if a CUDA enabled device exists
+			self.cap = cv2.cudacodec.createVideoReader(str(capture)) #Convert video capture to CUDA codec
+		else:
+			self.cap = capture #Use default if no CUDA device
+
 		self.lock = threading.Lock()
 		self.t = threading.Thread(target=self._reader)
 		self.t.daemon = True
