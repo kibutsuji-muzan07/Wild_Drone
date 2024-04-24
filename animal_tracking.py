@@ -75,7 +75,7 @@ def is_glare_present(frame):
   avg_value = np.mean(value_channel)
 
   # Define glare threshold (adjust based on your video characteristics)
-  glare_threshold = 220
+  glare_threshold = 200
 
   return avg_value > glare_threshold
 
@@ -118,7 +118,8 @@ def find_zebra(url):
 
         # Check for glare
         if is_glare_present(img):
-            processed_frame = tone_mapping(img.copy())  # Apply tone mapping on a copy
+            #processed_frame = tone_mapping(img.copy())  # Apply tone mapping on a copy
+            processed_frame = tone_mapping(img.copy())
         else:
             processed_frame = img
 
@@ -193,4 +194,4 @@ def take_snapshot(url):
 
 
 
-find_zebra("192.168.1.5")
+#find_zebra("192.168.1.5")
