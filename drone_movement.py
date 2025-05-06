@@ -30,7 +30,7 @@ CTRL_GAIN_Y = 0.03
 
 ## FUNCTIONS
 def requestGet(baseUrl, endPoint, verbose=False):
-	response = requests.get(baseUrl + endPoint)
+	response = requests.get(baseUrl + endPoint, timeout=60)
 	if verbose:
 		print("EP : " + endPoint + "\t" + str(response.content, encoding="utf-8"))
 	return response
@@ -41,7 +41,7 @@ def requestAllStates(baseUrl, verbose=False):
 	return states
 
 def requestSend(baseUrl, endPoint, data, verbose=False):
-	response = requests.post(baseUrl + endPoint, str(data))
+	response = requests.post(baseUrl + endPoint, str(data), timeout=60)
 	if verbose:
 		print("EP : " + endPoint + "\t" + str(response.content, encoding="utf-8"))
 	return response
