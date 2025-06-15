@@ -1,6 +1,7 @@
 ## IMPORTS
 import requests
 import ast
+from security import safe_requests
 
 ## CONSTANTS
 
@@ -30,7 +31,7 @@ CTRL_GAIN_Y = 0.03
 
 ## FUNCTIONS
 def requestGet(baseUrl, endPoint, verbose=False):
-	response = requests.get(baseUrl + endPoint)
+	response = safe_requests.get(baseUrl + endPoint)
 	if verbose:
 		print("EP : " + endPoint + "\t" + str(response.content, encoding="utf-8"))
 	return response
